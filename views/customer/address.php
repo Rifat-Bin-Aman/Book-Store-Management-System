@@ -1,20 +1,22 @@
 <?php include __DIR__ . '/../layout/header.php'; ?>
 
-<div class="container">
-    <div class="card">
-        <h3>Shipping Address</h3>
+<div class="card" style="max-width:720px;margin:10px auto;">
+  <h3>Shipping Address</h3>
 
-        <form method="post" action="index.php?page=confirm_order">
+  <?php if (!empty($success)): ?>
+    <div class="alert success"><?= htmlspecialchars($success) ?></div>
+  <?php endif; ?>
 
-            <textarea name="address" required
-                placeholder="Enter your full shipping address"><?= 
-                htmlspecialchars($addr['address']) ?></textarea>
+  <form method="post" data-validate="true" novalidate>
+    <label>Address</label>
+    <textarea name="address" placeholder="Enter your full shipping address" data-rule="required" required><?= htmlspecialchars($addr['address'] ?? '') ?></textarea>
 
-            <br><br>
+    <button type="submit" style="margin-top:14px;">Save Address</button>
+  </form>
 
-            <button type="submit">Confirm Order</button>
-        </form>
-    </div>
+  <p class="muted" style="margin-top:10px;">
+    Tip: When you confirm an order from your cart, this address will be used.
+  </p>
 </div>
 
 <?php include __DIR__ . '/../layout/footer.php'; ?>
